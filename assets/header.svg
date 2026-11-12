@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="280" viewBox="0 0 1280 280" role="img" aria-labelledby="title desc">
+  <title id="title">Hello, World! Bem-vindo ao meu GitHub.</title>
+  <desc id="desc">Banner escuro com faixas verdes e um Pac-Man percorrendo uma linha de pontos.</desc>
+  <defs>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="#153421" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="280" fill="#0d1117"/>
+  <rect x="832" width="448" height="232" fill="url(#grid)"/>
+  <rect x="56" y="47" width="8" height="8" fill="#07ba22"/>
+  <text x="77" y="56" fill="#07ba22" font-family="Consolas, 'Courier New', monospace" font-size="14" letter-spacing="3">BEM-VINDO AO MEU GITHUB</text>
+  <text x="52" y="143" fill="#f0f6fc" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700" letter-spacing="-3">Hello, World<tspan fill="#07ba22">!</tspan></text>
+  <text x="57" y="185" fill="#bac7bd" font-family="Consolas, 'Courier New', monospace" font-size="17" letter-spacing="2">CÓDIGO. IDEIAS. SOLUÇÕES.</text>
+  <path d="M985 111 A50 50 0 1 0 985 169 L945 140 Z" fill="#07ba22"/>
+  <circle cx="948" cy="113" r="5" fill="#0d1117"/>
+  <g fill="#058218">
+    <circle cx="1026" cy="140" r="6"/>
+    <circle cx="1070" cy="140" r="6"/>
+    <circle cx="1114" cy="140" r="6"/>
+    <circle cx="1158" cy="140" r="6"/>
+  </g>
+  <path d="M0 240H580L621 213H1007L1048 240H1280V280H0Z" fill="#058218"/>
+  <path d="M0 255H610L651 228H1028L1069 255H1280V280H0Z" fill="#07ba22"/>
+  <path d="M0 275H640L681 248H1049L1090 275H1280V280H0Z" fill="#0d1117"/>
+</svg>

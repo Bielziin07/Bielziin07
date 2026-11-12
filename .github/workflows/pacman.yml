@@ -1,0 +1,64 @@
+name: Atualizar Pac-Man
+
+on:
+  schedule:
+    # Todos os dias às 06:17 UTC (03:17 em Brasília).
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/pacman.yml'
+      - 'README.md'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pacman-profile
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+
+    steps:
+      - name: Obter a branch principal do perfil
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+
+      - name: Gerar contribuições com Pac-Man
+        uses: abozanona/pacman-contribution-graph@main
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          games: pacman
+          player_style: opportunistic
+          hide_month_labels: 'false'
+
+      - name: Salvar as animações no repositório
+        env:
+          PROFILE_BRANCH: ${{ github.event.repository.default_branch }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s dist/pacman-contribution-graph.svg
+          test -s dist/pacman-contribution-graph-dark.svg
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- dist/pacman-contribution-graph.svg dist/pacman-contribution-graph-dark.svg
+
+          if git diff --cached --quiet; then
+            echo "As contribuições já estão atualizadas."
+            exit 0
+          fi
+
+          git commit -m "docs: atualiza animação de contribuições"
+          git pull --rebase origin "$PROFILE_BRANCH"
+          git push origin "HEAD:$PROFILE_BRANCH"
